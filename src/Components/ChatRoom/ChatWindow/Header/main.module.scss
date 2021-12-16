@@ -1,0 +1,144 @@
+
+@keyframes appear{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+.header
+{
+    display: flex;
+    justify-content: space-between;
+    padding:15px;
+    padding-bottom: 10px;
+    box-shadow: 0 0 1px black;
+    position:relative;
+    h4{
+        margin-top: 0;
+        margin-bottom: 4px;
+    }
+    svg{
+        width:18px;
+        padding:3px;
+    }
+    img{
+        width: 30px;
+        border-radius: 50%;
+    }
+    :nth-child(2){
+        display: flex;
+        align-items: center;
+        >*{
+            margin: 0 4px;
+        }
+    }
+}
+.members
+{
+    width: 75px;
+    position:relative;
+    cursor: pointer;
+    >*{
+        position: absolute;
+    }
+    :first-child
+    {
+        left:0;
+    }
+    :nth-child(2)
+    {
+        left: calc(50% - 20px);
+        top:-12px;
+    }
+    :last-child
+    {
+        right:0;
+        width: 30px;
+        height: 30px;
+        background: rgb(230, 170, 142);
+        border-radius: 50%;
+        color:rgb(255, 30, 0);
+        font-size: .9rem;
+        font-weight: 600;
+        box-sizing: border-box;
+        display:flex;
+        align-items: center;
+    }
+}
+.invite
+{
+    display:flex;
+    >*{
+        margin: 0 4px;
+    }
+    &:hover{
+        cursor: pointer;
+        color:rgb(255, 115, 0);
+    }
+}
+.userInvite
+{
+    display:none;
+    position:fixed;
+    z-index: 2;
+    top:50%;
+    left:50%;
+    transform: translateY(-50%) translateX(-50%);
+    background-color: white;
+    box-shadow: 0 0 10px 0 gray;
+    padding:10px 15px;
+    border-radius: 5px;
+    animation:appear .3s linear;
+    div{
+        width: fit-content;
+        margin-left: auto;
+        padding:0 5px;
+        border-radius: 3px;
+        background-color: rgb(255, 72, 0);
+        color:white;
+        &:hover{
+            cursor: pointer;
+            opacity:.7;
+        }
+    }
+    h3{
+        margin-top: 0;
+        color: rgb(255, 153, 0);
+    }
+    input{
+        box-sizing: border-box;
+        padding:3px 8px;
+        border: 1px solid rgb(1, 145, 228);
+        border-radius: 3px;
+        font-size: 1rem;
+        width: 350px;
+        &:focus{
+            outline: 1px solid rgb(1, 64, 236);
+        }
+    }
+    button{
+        display: block;
+        margin: 8px 0 6px auto;
+        padding:5px 14px;
+        border: unset;
+        color: white;
+        background-color: rgb(0, 110, 255);
+        border-radius: 3px;
+        font-weight: bold;
+        &:hover{
+            cursor: pointer;
+            opacity: .7;
+        }
+    }
+}
+.error
+{
+    display:none;
+    padding:6px;
+    margin: 2px 0;
+    text-align: center;
+    color:red;
+}

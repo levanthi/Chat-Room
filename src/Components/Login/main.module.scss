@@ -1,0 +1,98 @@
+
+.login
+{
+    width: 100%;
+    max-width: 650px;
+    margin:auto;
+    box-sizing: border-box;
+    padding:20px;
+}
+form
+{
+    max-width: 500px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 4px #c5c5c5;
+    margin: auto;
+    text-align: center;
+    padding:40px 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+.formHeading
+{
+    font-size: 1.8rem;
+    margin-top: 0;
+}
+.formPara
+{
+    color: #888;
+}
+.formGroup label
+{
+    display: block;
+    text-align: left;
+    padding:10px 0;
+}
+.formGroup 
+{
+    margin-bottom: 10px;
+    input{
+    padding:8px 15px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 1.05rem;
+    font-weight: bold;
+    border-radius: 5px;
+    border:2px solid #999;
+    }
+}
+.formGroup input:focus
+{
+    outline: none;
+    border:2px rgb(24, 157, 142) solid;
+}
+.formGroup span
+{
+    margin-top: 4px;
+    text-align: left;
+    font-size: 0.9rem;
+    display: block;
+    font-weight: lighter;
+}
+form button
+{
+    padding:10px 0;
+    width: 100%;
+    border-radius: 10px;
+    color: white;
+    background-color: rgb(27, 194, 177);
+    border: none;
+    font-size: 1.25rem;
+    margin: 10px 0;
+}
+form button:hover
+{
+    background-color: rgb(64, 240, 219);
+    cursor: pointer;
+}
+
+form span{
+    color: red;
+}
+.invalid input
+{
+    border: 2px solid red !important;
+}
+.formGroup div
+{
+    text-align: left;
+}
+.formGroup input[name="gender"]
+{
+    width: fit-content;
+    display: inline-block;
+    margin: 8px 14px;
+}
