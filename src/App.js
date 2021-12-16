@@ -51,7 +51,7 @@ function App() {
         <Route path='/signup' element={user?<ChatRoom/>:<SignUp/>}/> 
         <Route path='/chatroom' element={user?<ChatRoom/>:<Home/>}/> 
         <Route path='/useredit' element={user?<UserEdit/>:<SignIn/>}/> 
-        <Route path='/' element={user?<ChatRoom/>:<Home/>}/>
+        <Route path='Chat-Room/' element={user?<ChatRoom/>:<Home/>}/>
       </Routes>
     </context.Provider>
   );
