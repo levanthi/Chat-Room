@@ -5,7 +5,6 @@ import { ref, child, get } from "firebase/database"
 import styles from './main.module.scss'
 import { context } from '../../App'
 const $ = document.querySelector.bind(document)
-const $$ = document.querySelectorAll.bind(document)
 
 function Validator(options)
 {
@@ -77,7 +76,6 @@ function SignIn()
     const navigate = useNavigate()
     const [account,setAccount] = useState('')
     const [password,setPassword] = useState('')
-    const sigInRef = useRef()
     const {setUser} = useContext(context)
     const signinRef = useRef()
     useEffect(()=>{

@@ -1,10 +1,9 @@
 import clsx from 'clsx'
-import {useContext,useEffect,useRef,useState} from 'react'
+import {useContext,useEffect,useState} from 'react'
 import { ref, push, set,onValue } from "firebase/database"
 
 import { db } from '../../../../Firebase/config'
 import { context } from '../../../../App'
-import writeData from '../../../../Hooks/useFirebase'
 import styles from './main.module.scss'
 import Avatar from '../../../../static/image/defaultAvatar.png'
 

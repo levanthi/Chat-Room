@@ -1,4 +1,4 @@
-import {useRef,useEffect,useState,useContext} from 'react'
+import {useRef,useState,useContext} from 'react'
 import { ref, child, get } from "firebase/database"
 
 import writeData from '../../../../Hooks/useFirebase'
@@ -23,7 +23,7 @@ function RoomList()
         writeData('chatrooms/',id,{
             name:inputName,
             description:inputDescription,
-            members:[{username:user.accountName}],
+            members:[{username:user.accountName,avata:user.avata||''}],
             chatbox:[],
             id:id,
         })

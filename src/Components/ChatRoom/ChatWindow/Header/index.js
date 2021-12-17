@@ -1,5 +1,5 @@
-import { useContext,useState,useRef } from 'react'
-import {  ref, child, get,update } from "firebase/database"
+import { useContext,useState,useRef, useEffect } from 'react'
+import {  ref, child, get,update,onValue } from "firebase/database"
 
 import { db } from '../../../../Firebase/config'
 import {context} from '../../../../App'
@@ -8,12 +8,25 @@ import {ReactComponent as UserAdd} from '../../../../static/icon/user-plus-solid
 import Avata from '../../../../static/image/defaultAvatar.png'
 function Header()
 {
-    const {chatWindow} = useContext(context)
+    const {chatWindow,setChatWindow} = useContext(context)
     const [userInvite,setUserInvite] = useState()
     const userInviteRef = useRef()
     const errRef = useRef()
+    let id
+    useEffect(()=>{
+        if(chatWindow)
+            id=chatWindow.id
+    },[chatWindow])
+    useEffect(()=>{
+        const chatWindowRef = ref(db, 'chatrooms/' + id)
+        onValue(chatWindowRef, (snapshot) => {
+        const data = snapshot.val();
+        setChatWindow(data);
+        })
+    },[id])
     function handleInviteUser()
     {
+        if(!userInvite) return
         const dbRef = ref(db)
         get(child(dbRef, `users/${userInvite}`)).then((snapshot) => {
         if (snapshot.exists()) {
@@ -25,23 +38,46 @@ function Header()
             {
                 rooms = [{id:chatWindow.id,name:chatWindow.name},...rooms]
             }
+            else{
+                errRef.current.innerText='User had exsisted in this room.'
+                return
+            }
             let updates = {}
             updates[`users/${userInvite}/rooms`] = rooms
-            console.log(updates)
             update(dbRef,updates)
+
+            
+            get(child(dbRef, `chatrooms/${chatWindow.id}/members`)).then((snapshot1) => {
+                if (snapshot1.exists()) {
+                  let memberUpdate = {}
+                  memberUpdate[`chatrooms/${chatWindow.id}/members`] = 
+                    [{username:userInvite,avata:snapshot.val().avata||''},...snapshot1.val()]
+                    update(dbRef,memberUpdate)
+                } else {
+                  console.log("No data available");
+                }
+              }).catch((error) => {
+                console.error(error);
+              })
+
+            
+
             userInviteRef.current.style.display='none'
+            errRef.current.innerText=''
+            setUserInvite('')
         } else {
-            errRef.current.style.display='block'
+            errRef.current.innerText='User not found, try again please!'
         }
         }).catch((error) => {
         console.error(error);
         })
     }
-    console.log(userInvite)
+
     return(
         <>
             <div ref={userInviteRef} className={styles.userInvite}>
                 <div  onClick={()=>{
+                    errRef.current.innerText=''
                     userInviteRef.current.style.display='none'
                     setUserInvite('')
                     }}>x</div>
@@ -49,9 +85,9 @@ function Header()
                 <input
                     placeholder='Enter username...' 
                     value={userInvite}
-                    onChange={e=>{errRef.current.style.display='none';setUserInvite(e.target.value)}}
+                    onChange={e=>{errRef.current.innerText='';setUserInvite(e.target.value)}}
                 />
-                <p ref={errRef} className={styles.error} >User not found, retry one more time please!</p>
+                <p ref={errRef} className={styles.error} ></p>
                 <button onClick={handleInviteUser} >ADD</button>
             </div>
             {chatWindow?
@@ -78,19 +114,19 @@ function Header()
                                     chatWindow.members[0].avata:
                                     Avata
                                 } 
-                                alt='image' 
+                                alt='img' 
                             />
                             {chatWindow.members[1]?<img 
                                 src={chatWindow.members[1].avata?
                                     chatWindow.members[1].avata:
                                     Avata
                                 } 
-                                alt='image' 
+                                alt='img' 
                             />
                             :''}
                             {chatWindow.members.length>=3?
                                 <span style={{justifyContent:'center'}}>
-                                    {chatWindow.members.length-2}
+                                    +{chatWindow.members.length-2}
                                 </span>
                                 :''
                             }
