@@ -74,7 +74,7 @@ function ChatSection()
                                         )
                                     }>
                                     <div>
-                                        <img src={chatItem.avata||Avatar} alt='image'/>
+                                        <img src={chatItem.avata||Avatar} alt='img'/>
                                         <span className={styles.name}>{chatItem.name}</span>
                                         <span className={styles.time} >{chatItem.time}</span>
                                     </div>

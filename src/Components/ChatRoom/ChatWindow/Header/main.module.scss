@@ -12,8 +12,8 @@
 {
     display: flex;
     justify-content: space-between;
-    padding:15px;
-    padding-bottom: 10px;
+    padding:16px;
+    padding-bottom: 11px;
     box-shadow: 0 0 1px black;
     position:relative;
     h4{
@@ -26,6 +26,7 @@
     }
     img{
         width: 30px;
+        height: 30px;
         border-radius: 50%;
     }
     :nth-child(2){

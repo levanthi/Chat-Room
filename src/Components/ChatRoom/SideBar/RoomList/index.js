@@ -23,7 +23,7 @@ function RoomList()
         writeData('chatrooms/',id,{
             name:inputName,
             description:inputDescription,
-            members:[{username:user.accountName,avata:user.avata||''}],
+            members:{[user.accountName]:{avata:user.avata||''}},
             chatbox:[],
             id:id,
         })

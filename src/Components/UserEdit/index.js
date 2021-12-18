@@ -1,5 +1,5 @@
 import { useContext ,useEffect,useState} from 'react'
-import {ref,update} from 'firebase/database'
+import {ref,update,set} from 'firebase/database'
 import {useNavigate} from 'react-router-dom'
 import { db } from '../../Firebase/config'
 import {context} from '../../App'
@@ -25,6 +25,14 @@ function UserEdit()
             updates[`users/${user.accountName}/name`] = name
             updates[`users/${user.accountName}/avata`] = avata
             update(ref(db),updates)
+
+            user.rooms.forEach((room)=>
+            {
+                set(ref(db, 'chatrooms/' + room.id +'/members/'+user.accountName), {
+                    avata:avata
+                  })
+            })
+
             navigate('/chatroom')
         }
     }

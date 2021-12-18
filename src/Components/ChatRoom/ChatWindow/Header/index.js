@@ -1,5 +1,5 @@
 import { useContext,useState,useRef, useEffect } from 'react'
-import {  ref, child, get,update,onValue } from "firebase/database"
+import {  ref, child, get,update,onValue,set } from "firebase/database"
 
 import { db } from '../../../../Firebase/config'
 import {context} from '../../../../App'
@@ -46,19 +46,20 @@ function Header()
             updates[`users/${userInvite}/rooms`] = rooms
             update(dbRef,updates)
 
+            get(child(dbRef, `users/${userInvite}/avata`)).then((snapshot1) => {
+            if (snapshot1.exists()){
+                set(ref(db, 'chatrooms/' + chatWindow.id+'/members/'+userInvite), {
+                    avata:snapshot1.val()
+                  })
+            } else {
+                set(ref(db, 'chatrooms/' + chatWindow.id+'/members/'+userInvite), {
+                    avata:''
+                  })
+            }
+            }).catch((error) => {
+            console.error(error);
+            })
             
-            get(child(dbRef, `chatrooms/${chatWindow.id}/members`)).then((snapshot1) => {
-                if (snapshot1.exists()) {
-                  let memberUpdate = {}
-                  memberUpdate[`chatrooms/${chatWindow.id}/members`] = 
-                    [{username:userInvite,avata:snapshot.val().avata||''},...snapshot1.val()]
-                    update(dbRef,memberUpdate)
-                } else {
-                  console.log("No data available");
-                }
-              }).catch((error) => {
-                console.error(error);
-              })
 
             
 
@@ -110,23 +111,23 @@ function Header()
                         </span>
                         <span className={styles.members}>
                             <img 
-                                src={chatWindow.members[0].avata?
-                                    chatWindow.members[0].avata:
+                                src={chatWindow.members[Object.keys(chatWindow.members)[0]].avata?
+                                    chatWindow.members[Object.keys(chatWindow.members)[0]].avata:
                                     Avata
                                 } 
-                                alt='img' 
+                                alt='img1' 
                             />
-                            {chatWindow.members[1]?<img 
-                                src={chatWindow.members[1].avata?
-                                    chatWindow.members[1].avata:
+                            {Object.keys(chatWindow.members).length>1?<img 
+                                src={chatWindow.members[Object.keys(chatWindow.members)[1]].avata?
+                                    chatWindow.members[Object.keys(chatWindow.members)[1]].avata:
                                     Avata
                                 } 
-                                alt='img' 
+                                alt='img2' 
                             />
                             :''}
-                            {chatWindow.members.length>=3?
+                            {Object.keys(chatWindow.members).length>=3?
                                 <span style={{justifyContent:'center'}}>
-                                    +{chatWindow.members.length-2}
+                                    +{Object.keys(chatWindow.members).length-2}
                                 </span>
                                 :''
                             }
