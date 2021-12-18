@@ -135,7 +135,7 @@ function SignIn()
                             {
                                 sessionStorage.setItem('user',temp)
                                 setUser(temp)
-                                navigate('/chatroom')
+                                navigate('/Chat-Room/chatroom')
                             }
                             else{
                                 signinRef.current.innerText='Username or password incorrect!'

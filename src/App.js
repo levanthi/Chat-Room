@@ -29,11 +29,14 @@ function App() {
   },[])
   useEffect(()=>{
     const accountName = accountRef.current
-    const userUpdate = ref(db, 'users/'+accountName);
-    onValue(userUpdate, (snapshot) => {
-      const data = snapshot.val();
-      setUser(data)
-    })
+    if(accountName)
+    {
+      const userUpdate = ref(db, 'users/'+accountName);
+      onValue(userUpdate, (snapshot) => {
+        const data = snapshot.val();
+        setUser(data)
+      })
+    }
   },[accountRef.current])
 
   useEffect(()=>{
@@ -42,15 +45,19 @@ function App() {
       sessionStorage.setItem('user',JSON.stringify(user))
       accountRef.current = user.accountName
     }
+    return ()=>{
+      setChatWindow(null)
+    }
   },[user])
 
+  console.log('app:rerender')
   return (
     <context.Provider value={{user,setUser,chatWindow,setChatWindow}}>
       <Routes>
-        <Route path='/signin' element={user?<ChatRoom/>:<SignIn setUser={setUser}/>}/> 
-        <Route path='/signup' element={user?<ChatRoom/>:<SignUp/>}/> 
-        <Route path='/chatroom' element={user?<ChatRoom/>:<Home/>}/> 
-        <Route path='/useredit' element={user?<UserEdit/>:<SignIn/>}/> 
+        <Route path='Chat-Room/signin' element={user?<ChatRoom/>:<SignIn setUser={setUser}/>}/> 
+        <Route path='Chat-Room/signup' element={user?<ChatRoom/>:<SignUp/>}/> 
+        <Route path='Chat-Room/chatroom' element={user?<ChatRoom/>:<Home/>}/> 
+        <Route path='Chat-Room/useredit' element={user?<UserEdit/>:<SignIn/>}/> 
         <Route path='Chat-Room/' element={user?<ChatRoom/>:<Home/>}/>
       </Routes>
     </context.Provider>

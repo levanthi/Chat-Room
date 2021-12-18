@@ -10,7 +10,7 @@ import Avatar from '../../../../static/image/defaultAvatar.png'
 function ChatSection()
 {
     const [message,setMessage] = useState('')
-    const {chatWindow,user} = useContext(context)
+    const {chatWindow,user,setChatWindow} = useContext(context)
     const [messageBox,setMessageBox] = useState()
     useEffect(()=>{
         if(chatWindow)
@@ -67,7 +67,7 @@ function ChatSection()
                         {
                             return (
                                 <div 
-                                    key={chatItem.time} 
+                                    key={Math.random().toString(36).substr(2, 9)} 
                                     className={
                                         clsx(styles.chatItem,
                                         me(chatItem.account)

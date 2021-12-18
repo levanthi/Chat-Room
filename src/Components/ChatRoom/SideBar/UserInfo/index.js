@@ -10,7 +10,7 @@ function UserInfo()
     return(
         <div className={styles.userInfo}>
             <div className={styles.user}>
-                <Link to='/useredit'>
+                <Link to='/Chat-Room/useredit'>
                     <img src={user.avata||avatar} alt='avata'/>
                 </Link>
                 <span>{user.name}</span>
@@ -20,7 +20,7 @@ function UserInfo()
                 onClick = {()=>{
                     sessionStorage.removeItem('user')
                     setUser(undefined)
-                    navigate('/signin')
+                    navigate('/Chat-Room/signin')
                 }}
             >Đăng xuất</button>
         </div>

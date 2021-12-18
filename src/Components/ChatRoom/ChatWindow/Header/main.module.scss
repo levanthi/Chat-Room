@@ -142,3 +142,18 @@
     text-align: center;
     color:red;
 }
+
+@media (max-width: 739px)
+{
+    .noroom
+    {
+        font-size: 1.5rem !important;
+    }
+    .userInvite
+    {
+        width: 85%;
+        input{
+            width: 100%;
+        }
+    }
+}

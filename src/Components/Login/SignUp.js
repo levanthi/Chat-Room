@@ -254,7 +254,7 @@ function SignUp()
                 } else {
                     writeData('users/',temp.accountName,temp)
                     alert('SignUp susscess! signin please!!!')
-                    navigate('/signin')
+                    navigate('/Chat-Room/signin')
                 }
                 }).catch((error) => {
                 console.error(error);

@@ -40,6 +40,10 @@
         border-radius: 5px;
         color:white;
         background-color: rgb(0, 174, 255);
+        &:hover{
+            cursor: pointer;
+            opacity: .7;
+        }
     }
 }
 .chatBox
@@ -99,5 +103,10 @@
         float: right;
         background-color: rgb(0, 89, 255);
         color:white;
+    }
+}
+@media (max-width:739px){
+    .sendGroup{
+        width: 100%;
     }
 }

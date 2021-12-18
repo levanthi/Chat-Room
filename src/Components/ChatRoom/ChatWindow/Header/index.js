@@ -134,7 +134,7 @@ function Header()
                         </span>
                     </div>
                 </div>
-                :<h1 style={{margin:'40px auto'}}>Vui lòng chọn room chat!!!</h1>
+                :<h1 className={styles.noroom} style={{margin:'40px auto'}}>Vui lòng chọn room chat!!!</h1>
             }
         </>
     )

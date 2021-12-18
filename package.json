@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "clsx": "^1.1.1",
+    "emoji-picker-react": "^3.4.12",
     "firebase": "^9.6.1",
     "firebaseui": "^6.0.0",
     "gh-pages": "^3.2.3",

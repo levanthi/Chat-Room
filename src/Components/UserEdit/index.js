@@ -7,6 +7,7 @@ import styles from './main.module.scss'
 
 function UserEdit()
 {
+    console.log('useredit:rerender')
     const {user} = useContext(context)
     const [name,setName] = useState()
     const [avata,setAvata] = useState()
@@ -25,15 +26,15 @@ function UserEdit()
             updates[`users/${user.accountName}/name`] = name
             updates[`users/${user.accountName}/avata`] = avata
             update(ref(db),updates)
-
-            user.rooms.forEach((room)=>
+            let rooms = user.rooms||[]
+            rooms.forEach((room)=>
             {
                 set(ref(db, 'chatrooms/' + room.id +'/members/'+user.accountName), {
                     avata:avata
                   })
             })
 
-            navigate('/chatroom')
+            navigate('/Chat-Room/chatroom')
         }
     }
     return(
