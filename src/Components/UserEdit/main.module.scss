@@ -1,22 +1,24 @@
 
 .editForm
 {
-    margin-top: 30px;
-    padding-bottom: 10px;
-    padding-top: 25px;
+    position: absolute;
+    top:15%;
+    width: 500px;
     input{
         width: 100%;
         padding:6px 10px;
-        margin: 6px 0 20px 0;
-        border-radius: 3px;
+        margin: 8px 0 12px;
         box-sizing: border-box;
-        border: 1px solid;
         font-size: 1rem;
+        &:focus{
+            outline: 2px solid #1bc2b1;
+        }
     }
     span
     {
+        font-size: 1.099rem;
+        color:white;
         display: block;
-        color:black;
         text-align: left;
     }
     button
@@ -24,6 +26,13 @@
         font-size: 1rem;
         font-weight: bold;
         padding:7px;
-        margin-top: 5px;
+        margin-top: 15px;
+        border-radius: 0;
+    }
+}
+
+@media (max-width:739px) {
+    .editForm{
+        width: 100%;
     }
 }

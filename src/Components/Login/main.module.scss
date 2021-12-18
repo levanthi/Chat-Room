@@ -6,16 +6,20 @@
     margin:auto;
     box-sizing: border-box;
     padding:20px;
+    color:white;
+    position: absolute;
+    top:15%;
+}
+.signUp
+{
+    top:5%;
 }
 form
 {
     max-width: 500px;
-    background-color: white;
     border-radius: 5px;
-    box-shadow: 0 0 4px 4px #c5c5c5;
     margin: auto;
     text-align: center;
-    padding:40px 30px;
     font-size: 1rem;
     font-weight: bold;
     font-family: sans-serif;
@@ -34,25 +38,27 @@ form
 {
     display: block;
     text-align: left;
-    padding:10px 0;
+    padding:4px 0;
 }
 .formGroup 
 {
-    margin-bottom: 10px;
+    margin-bottom: 4px;
     input{
-    padding:8px 15px;
+    padding:7px 15px 7px 0;
     width: 100%;
     box-sizing: border-box;
     font-size: 1.05rem;
     font-weight: bold;
-    border-radius: 5px;
-    border:2px solid #999;
+    border-radius: 2px;
+    border: 2px solid transparent;
+    border-bottom:1px solid rgb(64, 240, 219);
+    background-color: transparent;
+    color:white;
     }
 }
 .formGroup input:focus
 {
     outline: none;
-    border:2px rgb(24, 157, 142) solid;
 }
 .formGroup span
 {
@@ -61,17 +67,18 @@ form
     font-size: 0.9rem;
     display: block;
     font-weight: lighter;
+    height:16px;
 }
 form button
 {
-    padding:10px 0;
+    padding:7px 0;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 2px;
     color: white;
     background-color: rgb(27, 194, 177);
     border: none;
-    font-size: 1.25rem;
-    margin: 10px 0;
+    font-size: 1.15rem;
+    margin: 16px 0;
 }
 form button:hover
 {
@@ -84,7 +91,7 @@ form span{
 }
 .invalid input
 {
-    border: 2px solid red !important;
+    border-bottom: 1px solid red !important;
 }
 .formGroup div
 {

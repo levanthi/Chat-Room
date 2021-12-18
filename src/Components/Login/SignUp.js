@@ -264,15 +264,12 @@ function SignUp()
     },[state])
 
     return(
-        <div className={clsx(styles.login)}>
+        <div className={clsx(styles.login,styles.signUp)}>
             <form action="POST" id="form1" autoComplete="off">
                 <div className={clsx(styles.formHeader)}>
                     <h1 className={clsx(styles.formHeading)}>
                         Đăng kí thành viên
                     </h1>
-                    <p className={clsx(styles.formPara)}>
-                        Cùng nhau học lập trình miễn phí tại f8
-                    </p>
                 </div>
 
                 <div className={clsx(styles.formGroup)}>

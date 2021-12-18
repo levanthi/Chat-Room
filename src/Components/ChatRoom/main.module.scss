@@ -4,10 +4,11 @@
     display:flex;
     width: 100%;
     position:relative;
+    background-color: wheat;
 }
 @media (max-width:739px) {
     .chatroom{
         flex-direction: column;
-        min-height:93vh;
+        height: 93vh;
     }
 }

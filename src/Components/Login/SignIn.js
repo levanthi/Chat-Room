@@ -94,9 +94,10 @@ function SignIn()
             <form id='form1'>
                 <h2 style={{marginTop:'0'}} >Đăng Nhập</h2>
                 <div className={styles.formGroup}>
-                    <label htmlFor="accountName">Tên tài khoản</label>
+                    <label htmlFor="accountName">Username</label>
                     <input 
                         value={account}
+                        autoComplete='off'
                         type="text" 
                         name="accountName"
                         id="accountName" 
@@ -109,9 +110,10 @@ function SignIn()
                     <span className={styles.errorMessage}></span>
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="password">Mật khẩu</label>
+                    <label htmlFor="password">Password</label>
                     <input 
                         value={password}
+                        placeholder='Enter password...'
                         type="password" 
                         name="password"
                         id="password" 
