@@ -1,7 +1,9 @@
 import clsx from 'clsx'
-import {useContext,useEffect,useState} from 'react'
+import {useContext,useEffect,useState,useRef} from 'react'
 import { ref, push, set,onValue } from "firebase/database"
+import Picker from 'emoji-picker-react'
 
+import {ReactComponent as SmileIcon} from '../../../../static/icon/smile-solid.svg'
 import { db } from '../../../../Firebase/config'
 import { context } from '../../../../App'
 import styles from './main.module.scss'
@@ -9,6 +11,15 @@ import Avatar from '../../../../static/image/defaultAvatar.png'
 
 function ChatSection()
 {
+    //emojy
+    const emojiRef = useRef()
+    const overlayRef = useRef()
+    const onEmojiClick = (event, emojiObject) => {
+        setMessage(message+emojiObject.emoji)
+    }   
+
+
+    // app
     const [message,setMessage] = useState('')
     const {chatWindow,user,setChatWindow} = useContext(context)
     const [messageBox,setMessageBox] = useState()
@@ -86,17 +97,48 @@ function ChatSection()
                     </div>
                 </div>
                 <div className={styles.sendGroup}>
-                    <input 
-                        placeholder='message...'
-                        value={message}
-                        onChange={(e)=>setMessage(e.target.value)}
-                        onKeyDown={e=>{
-                            if(e.key==='Enter')
-                            {
-                                handleSend()
-                            }
-                        }}
-                    />
+                    <div className={styles.inputWrap}>
+                        {/* emoji */}
+                        <div 
+                            ref={emojiRef} 
+                            className={styles.emoji} 
+                        >
+                        <Picker onEmojiClick={onEmojiClick} />
+                        </div>
+                        <div 
+                            ref={overlayRef} 
+                            className={styles.overlay}
+                            onClick={()=>{
+                                overlayRef.current.style.display='none'
+                                emojiRef.current.style.display='none'
+                            }}
+                        ></div>
+                        <input 
+                            placeholder='message...'
+                            value={message}
+                            onChange={(e)=>setMessage(e.target.value)}
+                            onKeyDown={e=>{
+                                if(e.key==='Enter')
+                                {
+                                    handleSend()
+                                }
+                            }}
+                        />
+                        <SmileIcon
+                            onClick={()=>{
+                                // emojiRef.current.style.display='block'
+                                if(emojiRef.current.style.display==='block')
+                                {
+                                    emojiRef.current.style.display='none'
+                                }
+                                else
+                                {
+                                    overlayRef.current.style.display='block'
+                                    emojiRef.current.style.display='block'
+                                }
+                            }}
+                        />
+                    </div>
                     <button
                         onClick={handleSend}
                     >Gửi</button>
