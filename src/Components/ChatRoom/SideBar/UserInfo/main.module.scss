@@ -1,3 +1,21 @@
+@keyframes rotate{
+    from{
+        transform:translateX(-50%) translateY(-50%) rotate(0);
+    }
+    to{
+        transform:translateX(-50%) translateY(-50%) rotate(360deg);
+        filter: hue-rotate(300deg);
+    }
+}
+@keyframes changeColor{
+    from{
+        filter: hue-rotate(10);
+    }
+    to{
+        filter: hue-rotate(360deg);
+    }
+}
+
 .userInfo
 {
     display:flex;
@@ -17,15 +35,50 @@
         margin: 0 10px;
     }
 }
+.buttonWrap
+{
+    width: 100px;
+    height: 40px;
+    box-sizing: border-box;
+    padding:3px;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    span{
+        display: none;
+        position: absolute;
+        width: 30%;
+        height: 120px;
+        background-color: blue;
+        left:50%;
+        top:50%;
+        transform:translateX(-50%) translateY(-50%);
+        animation:rotate 1.8s infinite linear,changeColor 10s infinite linear;
+        z-index: 1;
+        box-shadow: 0 0 10px aqua,
+                    0 0 20px aqua,
+                    0 0 30px aqua,
+                    0 0 40px aqua,
+    }
+}
 .logout
 {
-    min-width: 100px;
+    width: 100%;
+    height:100%;
     font-size: .9rem;
-    background-color: transparent;
+    background-color: #53002e;
     border:1px solid white;
-    color:white;border-radius: 3px;
+    color:white;
+    border-radius: 3px;
+    position: relative;
+    z-index: 2;
     &:hover{
         cursor: pointer;
-        background-color:rgba($color: #ffffff, $alpha: .3)
+        border: unset;
+        filter: brightness(120%);
+        box-shadow: 0 0 4px 0 ;
+        ~ span{
+            display: block;
+        }
     }
 }

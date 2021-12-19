@@ -15,14 +15,17 @@ function UserInfo()
                 </Link>
                 <span>{user.name}</span>
             </div>
-            <button 
-                className={styles.logout} 
-                onClick = {()=>{
-                    sessionStorage.removeItem('user')
-                    setUser(undefined)
-                    navigate('/Chat-Room/signin')
-                }}
-            >Đăng xuất</button>
+            <div className={styles.buttonWrap}>
+                <button 
+                    className={styles.logout} 
+                    onClick = {()=>{
+                        sessionStorage.removeItem('user')
+                        setUser(undefined)
+                        navigate('/Chat-Room/signin')
+                    }}
+                >Đăng xuất</button>
+                <span></span>
+            </div>
         </div>
     )
 }
