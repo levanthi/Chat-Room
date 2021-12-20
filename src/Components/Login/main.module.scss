@@ -1,4 +1,4 @@
-
+@import '../../static/scss/button.module.scss';
 .login
 {
     width: 100%;
@@ -75,14 +75,24 @@ form button
     width: 100%;
     border-radius: 2px;
     color: white;
-    background-color: rgb(27, 194, 177);
+    // background-color: rgb(27, 194, 177);
+    background-color: transparent;
     border: none;
     font-size: 1.15rem;
     margin: 16px 0;
+    border:1px solid #40f0db;
+    @include button();
 }
 form button:hover
 {
+    border:1px solid transparent;
     background-color: rgb(64, 240, 219);
+    box-shadow: 0 0 10px rgb(64, 240, 219),
+                0 0 15px rgb(64, 240, 219),
+                0 0 20px rgb(64, 240, 219),
+                0 0 40px rgb(64, 240, 219);
+    transition:background-color 0s,box-shadow 0s;
+    transition-delay: 1s;
     cursor: pointer;
 }
 

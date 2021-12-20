@@ -119,6 +119,7 @@ function ChatSection()
                         <div 
                             ref={messageRef}
                             contentEditable='true'
+                            data-text="Enter message..."
                             className={styles.input}
                             placeholder='message...'
                             onKeyDown={e=>{

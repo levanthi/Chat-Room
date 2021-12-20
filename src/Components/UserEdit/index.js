@@ -51,7 +51,13 @@ function UserEdit()
                 onChange={e=>{setAvata(e.target.value)}}
                 className={styles.avata}
             />
-            <button onClick={handleEdit} >UPDATE</button>
+            <button onClick={handleEdit} >
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                UPDATE
+            </button>
         </form>
     )
 }

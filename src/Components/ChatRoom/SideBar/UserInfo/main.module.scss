@@ -1,10 +1,10 @@
+@import '../../../../static/scss/border.module.scss';
 @keyframes rotate{
     from{
         transform:translateX(-50%) translateY(-50%) rotate(0);
     }
     to{
         transform:translateX(-50%) translateY(-50%) rotate(360deg);
-        filter: hue-rotate(300deg);
     }
 }
 @keyframes changeColor{
@@ -37,29 +37,7 @@
 }
 .buttonWrap
 {
-    width: 100px;
-    height: 40px;
-    box-sizing: border-box;
-    padding:3px;
-    position: relative;
-    border-radius: 3px;
-    overflow: hidden;
-    span{
-        display: none;
-        position: absolute;
-        width: 30%;
-        height: 120px;
-        background-color: blue;
-        left:50%;
-        top:50%;
-        transform:translateX(-50%) translateY(-50%);
-        animation:rotate 1.8s infinite linear,changeColor 10s infinite linear;
-        z-index: 1;
-        box-shadow: 0 0 10px aqua,
-                    0 0 20px aqua,
-                    0 0 30px aqua,
-                    0 0 40px aqua,
-    }
+    @include wrap();
 }
 .logout
 {

@@ -107,7 +107,12 @@
     position: relative;
     background-color: white;
     border-radius: 25px;
+    .input[contentEditable=true]:empty:before{
+        content:attr(data-text);
+        color:gray;
+    }
     .input{
+        
         overflow-wrap: break-word;
         background-color: transparent;
         font-size: 1.07rem;

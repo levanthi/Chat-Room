@@ -1,4 +1,4 @@
-
+@import '../../static/scss/button.module.scss';
 .editForm
 {
     position: absolute;
@@ -28,6 +28,7 @@
         padding:7px;
         margin-top: 15px;
         border-radius: 0;
+        @include button();
     }
 }
 

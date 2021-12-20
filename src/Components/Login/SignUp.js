@@ -353,7 +353,13 @@ function SignUp()
                 </div>
 
                 <span ref={signupRef}></span>
-                <button ref={submitRef} className={clsx(styles.button)}>Đăng ký</button>
+                <button ref={submitRef} className={clsx(styles.button)}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Đăng ký
+                </button>
 
             </form>
 
