@@ -15,13 +15,13 @@ function ChatSection()
     const emojiRef = useRef()
     const overlayRef = useRef()
     const onEmojiClick = (event, emojiObject) => {
-        setMessage(message+emojiObject.emoji)
+        messageRef.current.innerText+=emojiObject
     }   
 
 
     // app
-    const [message,setMessage] = useState('')
-    const {chatWindow,user,setChatWindow} = useContext(context)
+    const messageRef = useRef()
+    const {chatWindow,user} = useContext(context)
     const [messageBox,setMessageBox] = useState()
     useEffect(()=>{
         if(chatWindow)
@@ -34,11 +34,14 @@ function ChatSection()
     },[chatWindow])
     function handleSend()
     {
-        if(!message)
+        if(messageRef.current.innerText==='')
+        {
+            messageRef.current.innerText=''
             return
+        }
         let now = new Date()
         let data={
-            message:message,
+            message:messageRef.current.innerText,
             avata:user['avata']||'',
             name:user.name,
             time:now.toLocaleString(),
@@ -47,7 +50,7 @@ function ChatSection()
         const postListRef = ref(db, `chatrooms/${chatWindow.id}/chatBox`)
         const newPostRef = push(postListRef);
         set(newPostRef,data)
-        setMessage('')
+        messageRef.current.innerText=''
     }
 
     function me(name)
@@ -57,7 +60,7 @@ function ChatSection()
             return styles.me
         }
     }
-
+    console.log('message-render')
     if(chatWindow)
     {
         let renderBox =[]
@@ -113,17 +116,20 @@ function ChatSection()
                                 emojiRef.current.style.display='none'
                             }}
                         ></div>
-                        <input 
+                        <div 
+                            ref={messageRef}
+                            contentEditable='true'
+                            className={styles.input}
                             placeholder='message...'
-                            value={message}
-                            onChange={(e)=>setMessage(e.target.value)}
                             onKeyDown={e=>{
                                 if(e.key==='Enter')
                                 {
+                                    if(window.innerWidth>=740)
+                                        e.preventDefault()
                                     handleSend()
                                 }
                             }}
-                        />
+                        ></div>
                         <SmileIcon
                             onClick={()=>{
                                 // emojiRef.current.style.display='block'

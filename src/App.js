@@ -54,11 +54,11 @@ function App() {
   return (
     <context.Provider value={{user,setUser,chatWindow,setChatWindow}}>
       <Routes>
-        <Route path='Chat-Room/signin' element={user?<ChatRoom/>:<SignIn setUser={setUser}/>}/> 
-        <Route path='Chat-Room/signup' element={user?<ChatRoom/>:<SignUp/>}/> 
-        <Route path='Chat-Room/chatroom' element={user?<ChatRoom/>:<Home/>}/> 
-        <Route path='Chat-Room/useredit' element={user?<UserEdit/>:<SignIn/>}/> 
-        <Route path='Chat-Room/' element={user?<ChatRoom/>:<Home/>}/>
+        <Route path='/Chat-Room/signin' element={user?<ChatRoom/>:<SignIn setUser={setUser}/>}/> 
+        <Route path='/Chat-Room/signup' element={user?<ChatRoom/>:<SignUp/>}/> 
+        <Route path='/Chat-Room/chatroom' element={user?<ChatRoom/>:<Home/>}/> 
+        <Route path='/Chat-Room/useredit' element={user?<UserEdit/>:<SignIn/>}/> 
+        <Route path='/Chat-Room/' element={user?<ChatRoom/>:<Home/>}/>
       </Routes>
     </context.Provider>
   );

@@ -8,8 +8,8 @@ function Home()
     return (
         <div className={clsx(styles.home)}>
             <h2>WELCOME TO CHAT APP</h2>
-            <Link to='signin'>Đăng Nhập</Link>
-            <Link to='signup'>Đăng Ký</Link>
+            <Link to='/Chat-Room/signin'>Đăng Nhập</Link>
+            <Link to='/Chat-Room/signup'>Đăng Ký</Link>
         </div>
     )
 }

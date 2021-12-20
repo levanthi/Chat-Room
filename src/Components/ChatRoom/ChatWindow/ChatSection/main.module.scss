@@ -3,9 +3,9 @@
 {
     flex: 1;
     margin: 15px;
-    margin-bottom: 55px;
+    margin-bottom: 10px;
     margin-top: 3px;
-    min-height: 230px;
+    min-height: 50px;
     max-height: 700px;
     height: 100%;
     position:relative;
@@ -15,17 +15,16 @@
   }
 .sendGroup
 {
-    width:75%;
+    width:100%;
     display: flex;
     padding:10px;
     box-sizing: border-box;
-    position:absolute;
-    bottom: 0;
-    background-color: #0d367ec2;
-    
+    background-color: #2f58a5;
+    align-items: center;
     button{
+        max-height: 36px;
         font-size: .85rem;
-        padding:0 16px;
+        padding:8px 16px;
         margin-left: 10px;
         border:1px solid rgb(0, 132, 255);
         border-radius: 5px;
@@ -103,18 +102,25 @@
 }
 .inputWrap
 {
-    flex:1;
+    max-width: calc(100% - 70px);
+    flex: 1;
     position: relative;
-    input{
-        border:1px solid rgb(0, 132, 255);
-        font-size: 1rem;
-        padding:6px 10px;
-        width: 100%;
+    background-color: white;
+    border-radius: 25px;
+    .input{
+        overflow-wrap: break-word;
+        background-color: transparent;
+        font-size: 1.07rem;
+        padding:8px 12px;
+        width: calc(100% - 40px);
+        max-width: calc(100% - 30px);
+        max-height: 117px;
+        overflow-y: auto;
+        border: unset;
         box-sizing: border-box;
         border-radius: 20px;
-        &:focus{
-            outline:1px solid blue;
-        }
+        outline: none;
+        
     }
     svg{
         position: absolute;
@@ -153,5 +159,12 @@
 @media (max-width:739px){
     .sendGroup{
         width: 100%;
+        
+    }
+    @media (max-height:600px)
+    {
+        .sendGroup{
+            margin-bottom: 20px;
+        }
     }
 }
