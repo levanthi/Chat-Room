@@ -1,5 +1,5 @@
 import {useRef,useState,useContext} from 'react'
-import { ref, child, get } from "firebase/database"
+import { ref, child, get,update } from "firebase/database"
 
 import writeData from '../../../../Hooks/useFirebase'
 import styles from './main.module.scss'
@@ -16,7 +16,7 @@ function RoomList()
     const addRoombox = useRef()
     const [inputName,setInputName] = useState('')
     const [inputDescription,setInputDescription] = useState('')
-    const {user,setChatWindow} = useContext(context)
+    const {user,setChatWindow,loading,setLoading} = useContext(context)
     function handleAddRoom()
     {
         let id =ID()
@@ -25,24 +25,33 @@ function RoomList()
             description:inputDescription,
             members:{[user.accountName]:{avata:user.avata||''}},
             chatbox:[],
+            host:user.accountName,
             id:id,
         })
-        let arrRoom = user.rooms||[]
-        arrRoom.unshift({id,name:inputName})
-        writeData('users/',user.accountName,{
-            ...user,
-            rooms:arrRoom
-        })
+        
+        const updates = {}
+        updates[`users/${user.accountName}/rooms/${id}`]={name:inputName}
+        update(ref(db), updates)
+
         addRoombox.current.style.display='none'
         setInputName('')
         setInputDescription('')
     }
+    function mapRooms(rooms){
+        let arr =[]
+        Object.keys(rooms).map((id)=>{
+            arr.push({id,name:rooms[id].name})
+        })
+        return arr
+    }
     function handleChatWindow(id)
     {
+        setLoading(!loading)
         const dbRef = ref(db)
         get(child(dbRef, 'chatrooms/'+id)).then((snapshot) => {
         if (snapshot.exists()) {
             setChatWindow(snapshot.val())
+            setLoading(false)
         } else {
             console.log("No data available");
         }
@@ -59,36 +68,42 @@ function RoomList()
             </label>
             <span>Danh sách phòng</span>
             <ul className={styles.list}>
-                {user.rooms?user.rooms.map((room)=>{
+                {user.rooms?mapRooms(user.rooms).map((room)=>{
                     return (
                         <li onClick={()=>handleChatWindow(room.id)} key={room.id}>{room.name}</li>
                     )
                 }):''}
-                <li className={styles.addRoom} onClick={()=>addRoombox.current.style.display='block'} >
+                <li 
+                    className={`${styles.addRoom}`} 
+                    onClick={()=>{
+                        addRoombox.current.classList.remove(styles.hide)
+                        addRoombox.current.style.display='block'
+                    }}>
                     <Plus/>
                     Thêm phòng
                 </li>
             </ul>
         </div>
-        <div ref={addRoombox} className={styles.addRoombox}>
+
+        <div ref={addRoombox} className={`${styles.addRoombox}  ${styles.hide}`}>
             <span onClick={()=>{
-                addRoombox.current.style.display='none'
+                addRoombox.current.classList.add(styles.hide)
                 setInputName('')
                 setInputDescription('')
             }} >&times;</span>
-            <h4>Room name</h4>
+            <h4>Tên phòng</h4>
             <input 
                 value={inputName} 
-                placeholder='Enter room name' 
+                placeholder='Nhập tên phòng...' 
                 onChange={(e)=>setInputName(e.target.value)} 
             />
-            <h4>Description</h4>
+            <h4>Mô tả</h4>
             <textarea
                 value={inputDescription}
-                placeholder='Description of room'
+                placeholder='Mô tả phòng...'
                 onChange={e=>setInputDescription(e.target.value)}
             ></textarea>
-            <button onClick={handleAddRoom} >ADD</button>
+            <button onClick={handleAddRoom} >Thêm</button>
         </div>
         </>
     )

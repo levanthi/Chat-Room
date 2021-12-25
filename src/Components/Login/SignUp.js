@@ -1,8 +1,10 @@
 import clsx from 'clsx'
 import {useNavigate} from 'react-router-dom'
-import { useEffect, useReducer, useRef } from 'react'
+import { useEffect, useReducer, useRef ,useContext} from 'react'
 import {  ref,get ,child} from "firebase/database"
 
+import {context} from '../../App'
+import Loading from '../Loading'
 import writeData from '../../Hooks/useFirebase'
 import styles from './main.module.scss'
 import {db} from '../../Firebase/config'
@@ -192,13 +194,10 @@ Validator.isPasswordComfirmation = (selector,password,message)=>{
 }
 
 function SignUp()
-{
-    // function handleFbLogin()
-    // {
-    //     signInWithPopup(auth,fbProvider)
-    // }   
+{  
     const navigate = useNavigate()
     const [state,dispatch] = useReducer(reducer,initState)
+    const {loading,setLoading} = useContext(context)
     const submitRef = useRef()
     const signupRef = useRef()
     useEffect(()=>{
@@ -243,6 +242,7 @@ function SignUp()
             const isSubmit = !$(`.${styles.invalid}`)
             if(isSubmit)
             {
+                setLoading(!loading)
                 const temp = state
                 delete temp.passwordConfirmation
                 console.log(temp)
@@ -250,12 +250,13 @@ function SignUp()
                 const dbRef = ref(db);
                 get(child(dbRef, `users/${temp.accountName}`)).then((snapshot) => {
                 if (snapshot.exists()) {
-                    signupRef.current.innerText='Username is exsisted!'
+                    signupRef.current.innerText='Tên tài khoản đã tồn tại!'
                 } else {
                     writeData('users/',temp.accountName,temp)
                     alert('SignUp susscess! signin please!!!')
                     navigate('/Chat-Room/signin')
                 }
+                setLoading(false)
                 }).catch((error) => {
                 console.error(error);
                 })
@@ -264,6 +265,8 @@ function SignUp()
     },[state])
 
     return(
+        <>
+        {loading?<Loading/>:''}
         <div className={clsx(styles.login,styles.signUp)}>
             <form action="POST" id="form1" autoComplete="off">
                 <div className={clsx(styles.formHeader)}>
@@ -274,7 +277,8 @@ function SignUp()
 
                 <div className={clsx(styles.formGroup)}>
                     <label htmlFor="name">Tên đầy đủ</label>
-                    <input 
+                    <input
+                        spellCheck='false'
                         value={state.name}
                         type="text" 
                         name="name"
@@ -288,7 +292,8 @@ function SignUp()
                 <div className={clsx(styles.formGroup)}>
                     <label htmlFor="accountName">Tên tài khoản</label>
                     <input 
-                        value={state.accountName} 
+                        value={state.accountName}
+                        spellCheck='false' 
                         name="accountName" 
                         id="accountName" 
                         placeholder="VD: example1001"
@@ -352,7 +357,7 @@ function SignUp()
                     <span className={clsx(styles.errorMessage)}></span>
                 </div>
 
-                <span ref={signupRef}></span>
+                <span ref={signupRef} className={styles.userExist} ></span>
                 <button ref={submitRef} className={clsx(styles.button)}>
                     <span></span>
                     <span></span>
@@ -365,6 +370,7 @@ function SignUp()
 
             <script src='../../library/Validator'></script>
         </div>
+        </>
     )
 }
 

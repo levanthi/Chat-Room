@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState ,useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {db} from '../../Firebase/config'
 import { ref, child, get } from "firebase/database"
+
+import Loading from '../Loading'
+import {db} from '../../Firebase/config'
 import styles from './main.module.scss'
 import { context } from '../../App'
 const $ = document.querySelector.bind(document)
@@ -76,7 +78,7 @@ function SignIn()
     const navigate = useNavigate()
     const [account,setAccount] = useState('')
     const [password,setPassword] = useState('')
-    const {setUser} = useContext(context)
+    const {setUser,loading,setLoading} = useContext(context)
     const signinRef = useRef()
     useEffect(()=>{
         Validator({
@@ -88,14 +90,16 @@ function SignIn()
             ]
         })
     },[])
-    
     return (
+        <>
+        {loading?<Loading/>:''}
         <div className={styles.login}>
             <form id='form1'>
                 <h2 style={{marginTop:'0'}} >Đăng Nhập</h2>
                 <div className={styles.formGroup}>
-                    <label htmlFor="accountName">Username</label>
+                    <label htmlFor="accountName">Tên tài khoản</label>
                     <input 
+                        spellCheck='false'
                         value={account}
                         autoComplete='off'
                         type="text" 
@@ -110,7 +114,7 @@ function SignIn()
                     <span className={styles.errorMessage}></span>
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Mật khẩu</label>
                     <input 
                         value={password}
                         placeholder='Enter password...'
@@ -124,10 +128,11 @@ function SignIn()
                     />
                     <span className={styles.errorMessage}></span>
                 </div>
-                <span ref={signinRef}></span>
+                <span ref={signinRef} className={styles.loginFail}></span>
                 <button onClick={ async ()=>{
                     if(account && password.length>=6)
                     {
+                        setLoading(!loading)
                         const dbRef = ref(db);
                         let temp
                         await get(child(dbRef, `users/`+account)).then((snapshot) => {
@@ -140,11 +145,13 @@ function SignIn()
                                 navigate('/Chat-Room/chatroom')
                             }
                             else{
-                                signinRef.current.innerText='Username or password incorrect!'
+                                signinRef.current.innerText='Tài khoản hoặc mật khẩu không chính xác!'
                             }
-                          } else {
-                            signinRef.current.innerText='Username or password incorrect!'
                           }
+                          else{
+                            signinRef.current.innerText='Tài khoản hoặc mật khẩu không chính xác!'
+                          }
+                            setLoading(false)
                         }).catch((error) => {
                           console.error(error);
                         })
@@ -159,6 +166,7 @@ function SignIn()
                 Đăng Nhập</button>
             </form>
         </div>
+        </>
     )
 }
 

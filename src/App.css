@@ -8,7 +8,6 @@ body{
   background: linear-gradient(rgba(1,1,1,.45),rgba(1,1,1,.45)) ,url('./static/image/desktopBacgroundImage.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
   position:relative;
 }
 #root{
@@ -16,9 +15,13 @@ body{
   display: flex;
   justify-content: center;
 }
+.hide{
+  display: none ;
+}
 @media (max-width:739px) {
   body{
     background-image:linear-gradient(rgba(1,1,1,.5),rgba(1,1,1,.5)), url('./static/image/mobileBackgroundImage5.jpg');
+    height: 93vh;
     overflow-y: hidden;
   }
 }

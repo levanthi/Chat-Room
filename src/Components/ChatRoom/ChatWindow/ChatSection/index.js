@@ -3,6 +3,7 @@ import {useContext,useEffect,useState,useRef} from 'react'
 import { ref, push, set,onValue } from "firebase/database"
 import Picker from 'emoji-picker-react'
 
+import Loading from '../../../Loading'
 import {ReactComponent as SmileIcon} from '../../../../static/icon/smile-solid.svg'
 import { db } from '../../../../Firebase/config'
 import { context } from '../../../../App'
@@ -21,7 +22,7 @@ function ChatSection()
 
     // app
     const messageRef = useRef()
-    const {chatWindow,user} = useContext(context)
+    const {chatWindow,user,loading} = useContext(context)
     const [messageBox,setMessageBox] = useState()
     useEffect(()=>{
         if(chatWindow)
@@ -74,7 +75,6 @@ function ChatSection()
         }
         return(
             <>
-                
                 <div className={styles.chatSection}>
                     <div className={styles.chatBox}>
                         {renderBox.map((chatItem)=>
@@ -153,7 +153,7 @@ function ChatSection()
             </>
         )
     }
-    return <></>
+    return <span className='responsive'> {loading?<Loading/>:''}</span>
 }
 
 export default ChatSection

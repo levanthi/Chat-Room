@@ -1,0 +1,13 @@
+
+.hide{
+    animation:hide .3s linear forwards !important;
+}
+@keyframes hide{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+        display: none !important;
+    }
+}

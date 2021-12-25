@@ -26,10 +26,11 @@ function UserEdit()
             updates[`users/${user.accountName}/name`] = name
             updates[`users/${user.accountName}/avata`] = avata
             update(ref(db),updates)
-            let rooms = user.rooms||[]
+            let rooms = Object.keys(user.rooms)||[]
+            console.log(rooms)
             rooms.forEach((room)=>
             {
-                set(ref(db, 'chatrooms/' + room.id +'/members/'+user.accountName), {
+                set(ref(db, 'chatrooms/' + room +'/members/'+user.accountName), {
                     avata:avata
                   })
             })
@@ -39,14 +40,16 @@ function UserEdit()
     }
     return(
         <form className={styles.editForm}>
-            <span>Name</span>
+            <span>Tên đầy đủ</span>
             <input 
+                spellCheck='false'
                 value={name}
                 onChange={e=>{setName(e.target.value)}}
                 className={styles.name}
             />
-            <span>Avata URL</span>
+            <span>Avatar URL</span>
             <input
+                spellCheck='false'
                 value={avata}
                 onChange={e=>{setAvata(e.target.value)}}
                 className={styles.avata}
@@ -56,7 +59,7 @@ function UserEdit()
                 <span></span>
                 <span></span>
                 <span></span>
-                UPDATE
+                Lưu
             </button>
         </form>
     )

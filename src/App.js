@@ -17,6 +17,7 @@ function App() {
 
   const [user,setUser] = useState()
   const [chatWindow,setChatWindow] = useState()
+  const [loading,setLoading] = useState(false)
   const navigate = useNavigate()
   const accountRef = useRef()
   useLayoutEffect(()=>{
@@ -38,7 +39,6 @@ function App() {
       })
     }
   },[accountRef.current])
-
   useEffect(()=>{
     if(user)
     {
@@ -52,7 +52,7 @@ function App() {
 
   console.log('app:rerender')
   return (
-    <context.Provider value={{user,setUser,chatWindow,setChatWindow}}>
+    <context.Provider value={{user,setUser,chatWindow,setChatWindow,loading,setLoading}}>
       <Routes>
         <Route path='/Chat-Room/signin' element={user?<ChatRoom/>:<SignIn setUser={setUser}/>}/> 
         <Route path='/Chat-Room/signup' element={user?<ChatRoom/>:<SignUp/>}/> 
