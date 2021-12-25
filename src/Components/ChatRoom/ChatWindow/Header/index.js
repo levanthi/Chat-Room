@@ -172,6 +172,13 @@ function Header()
                                 </span></div>
                                 :''
                             }
+                            <span className={styles.memberListWrap}>
+                                <span className={clsx(styles.memberList)}>
+                                    {Object.keys(chatWindow.members).map((img,index)=>{
+                                        return <img key={index} src={chatWindow.members[img].avata||Avata} alt='img' />
+                                    })}
+                                </span>
+                            </span>
                         </span>
                         {chatWindow.host===user.accountName?
                             <span 

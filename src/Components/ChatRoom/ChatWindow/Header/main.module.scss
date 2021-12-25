@@ -87,8 +87,12 @@
 .members
 {
     display: block;
-    position:relative;
     margin-left: 14px;
+    &:hover{
+        .memberListWrap{
+            display: block;
+        }
+    }
     cursor: pointer;
     div{
         position: relative;
@@ -276,5 +280,80 @@
         input{
             width: 100%;
         }
+    }
+}
+.memberList
+{
+    padding:1px 6px;
+    height:34px;
+    width: fit-content;
+    max-width: 250px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    // overflow-y: hidden;
+    img{
+        margin: 0 2px;
+        min-width: 30px;
+        min-height: 30px;
+    }
+}
+::-webkit-scrollbar {
+    height: 3px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+.memberListWrap
+{
+    display:none;
+    border-radius: 3px;
+    box-shadow: 0 0 5px gray;
+    animation:appear .3s linear;
+    position:absolute;
+    bottom:-50%;
+    z-index: 10;
+    right:65px;
+    &::before{
+        content:'';
+        position: absolute;
+        width:0;
+        height:0;
+        border:10px solid;
+        border-color: transparent;
+        border-bottom-color: white;
+        top:-20px;
+        right:17px;
+    }
+    &::after{
+        content:'';
+        position:absolute;
+        width: 70px;
+        height:20px;
+        background-color: transparent;
+        top:-16px;
+        right:0;
+    }
+}
+
+@media (max-width:739px) {
+    .memberList{
+        max-width: 166px;
+    }
+    .header{
+        padding:8px 15px;
     }
 }

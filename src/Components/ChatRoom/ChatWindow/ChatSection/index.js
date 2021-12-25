@@ -16,7 +16,7 @@ function ChatSection()
     const emojiRef = useRef()
     const overlayRef = useRef()
     const onEmojiClick = (event, emojiObject) => {
-        messageRef.current.innerText+=emojiObject
+        messageRef.current.innerText+=emojiObject.emoji
     }   
 
 
