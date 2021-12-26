@@ -12,12 +12,18 @@ function Header()
 {
     const {chatWindow,setChatWindow,user} = useContext(context)
     const [userInvite,setUserInvite] = useState()
+    const [memberList,setMemberList] = useState({})
     const userInviteRef = useRef()
     const errRef = useRef()
     let id
     useEffect(()=>{
         if(chatWindow)
             id=chatWindow.id
+        const membersRef = ref(db, '/chatrooms/' + id + '/members');
+        onValue(membersRef, (snapshot) => {
+        const data = snapshot.val();
+        setMemberList(data)
+        })
     },[chatWindow])
     useEffect(()=>{
         const chatWindowRef = ref(db, 'chatrooms/' + id)
@@ -25,6 +31,7 @@ function Header()
             const data = snapshot.val();
             setChatWindow(data);
         })
+        
     },[id])
     function handleInviteUser()
     {
@@ -53,7 +60,6 @@ function Header()
                 set(ref(db, 'chatrooms/' + chatWindow.id+'/members/'+userInvite), {
                     avata:snapshot1.val()
                   })
-                chatWindow.members={...chatWindow.members,[userInvite]:{avata:snapshot1.val()}}
             } else {
                 set(ref(db, 'chatrooms/' + chatWindow.id+'/members/'+userInvite), {
                     avata:''
@@ -120,7 +126,7 @@ function Header()
                     }}>x</div>
                 <h3>Mời</h3>
                 <input
-                    placeholder='Enter username...' 
+                    placeholder='Nhập tài khoản người dùng...' 
                     value={userInvite}
                     onChange={e=>{errRef.current.innerText='';setUserInvite(e.target.value)}}
                 />
@@ -148,38 +154,42 @@ function Header()
                                 Mời
                             </span>
                         </span>
-                        <span className={styles.members}>
-                            <div>
+                        {memberList?<span className={styles.members}>
+                            <div className={styles.icon1}>
                                 <img 
-                                    src={chatWindow.members[Object.keys(chatWindow.members)[0]].avata?
-                                        chatWindow.members[Object.keys(chatWindow.members)[0]].avata:
+                                    src={memberList[Object.keys(memberList)[0]].avata?
+                                        memberList[Object.keys(memberList)[0]].avata:
                                         Avata
                                     } 
                                     alt='img1' 
                                 />
                             </div>
-                            {Object.keys(chatWindow.members).length>1?<div><img 
-                                src={chatWindow.members[Object.keys(chatWindow.members)[1]].avata?
-                                    chatWindow.members[Object.keys(chatWindow.members)[1]].avata:
+                            {Object.keys(memberList).length>1?<div className={styles.icon2}><img 
+                                src={memberList[Object.keys(memberList)[1]].avata?
+                                    memberList[Object.keys(memberList)[1]].avata:
                                     Avata
                                 } 
                                 alt='img2' 
                             /></div>
                             :''}
-                            {Object.keys(chatWindow.members).length>=3?
-                                <div><span style={{justifyContent:'center'}}>
-                                    +{Object.keys(chatWindow.members).length-2}
+                            {Object.keys(memberList).length>=3?
+                                <div className={styles.icon3}><span style={{justifyContent:'center'}}>
+                                    +{Object.keys(memberList).length-2}
                                 </span></div>
                                 :''
                             }
-                            <span className={styles.memberListWrap}>
-                                <span className={clsx(styles.memberList)}>
-                                    {Object.keys(chatWindow.members).map((img,index)=>{
-                                        return <img key={index} src={chatWindow.members[img].avata||Avata} alt='img' />
-                                    })}
+                            {Object.keys(memberList).length>=3?
+                                <span className={styles.memberListWrap}>
+                                    <span className={clsx(styles.memberList)}>
+                                        {Object.keys(memberList).map((img,index)=>{
+                                            return <img key={index} src={memberList[img].avata||Avata} alt='img' />
+                                        })}
+                                    </span>
                                 </span>
-                            </span>
-                        </span>
+                                :''
+                            }
+                            
+                        </span>:''}
                         {chatWindow.host===user.accountName?
                             <span 
                                 className={styles.arrowDown}

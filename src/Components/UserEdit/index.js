@@ -26,7 +26,7 @@ function UserEdit()
             updates[`users/${user.accountName}/name`] = name
             updates[`users/${user.accountName}/avata`] = avata
             update(ref(db),updates)
-            let rooms = Object.keys(user.rooms)||[]
+            let rooms = Object.keys(user.rooms||{})||[]
             console.log(rooms)
             rooms.forEach((room)=>
             {

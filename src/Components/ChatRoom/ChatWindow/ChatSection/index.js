@@ -119,9 +119,8 @@ function ChatSection()
                         <div 
                             ref={messageRef}
                             contentEditable='true'
-                            data-text="Enter message..."
+                            data-text="Nhập tin nhắn..."
                             className={styles.input}
-                            placeholder='message...'
                             onKeyDown={e=>{
                                 if(e.key==='Enter')
                                 {

@@ -90,7 +90,7 @@
     margin-left: 14px;
     &:hover{
         .memberListWrap{
-            display: block;
+            display: block !important;
         }
     }
     cursor: pointer;
@@ -102,13 +102,13 @@
             position: absolute;
         }
     }
-    :first-child
+    .icon1
     {
        img{
         left:0;
        }
     }
-    :nth-child(2)
+    .icon2
     {
         width: 15px;
         height: 15px;
@@ -118,7 +118,7 @@
             transform: translateX(-50%);
         }
     }
-    :nth-child(3)
+    .icon3
     {
         span{
             right:0;
@@ -292,6 +292,7 @@
     display: flex;
     align-items: center;
     overflow-x: auto;
+    border-radius: 3px;
     // overflow-y: hidden;
     img{
         margin: 0 2px;
@@ -319,7 +320,7 @@
   }
 .memberListWrap
 {
-    display:none;
+    display:none !important;
     border-radius: 3px;
     box-shadow: 0 0 5px gray;
     animation:appear .3s linear;
@@ -355,5 +356,10 @@
     }
     .header{
         padding:8px 15px;
+    }
+    .deleteComfirm
+    {
+        width: 90%;
+        box-sizing: border-box;
     }
 }

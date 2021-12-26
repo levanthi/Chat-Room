@@ -117,7 +117,7 @@ function SignIn()
                     <label htmlFor="password">Mật khẩu</label>
                     <input 
                         value={password}
-                        placeholder='Enter password...'
+                        placeholder='Nhập mật khẩu...'
                         type="password" 
                         name="password"
                         id="password" 
