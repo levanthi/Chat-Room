@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Chat-Room/static/css/main.e548656f.chunk.css",
-    "main.js": "/Chat-Room/static/js/main.88633527.chunk.js",
-    "main.js.map": "/Chat-Room/static/js/main.88633527.chunk.js.map",
+    "main.js": "/Chat-Room/static/js/main.d7270b8d.chunk.js",
+    "main.js.map": "/Chat-Room/static/js/main.d7270b8d.chunk.js.map",
     "runtime-main.js": "/Chat-Room/static/js/runtime-main.1762c669.js",
     "runtime-main.js.map": "/Chat-Room/static/js/runtime-main.1762c669.js.map",
-    "static/js/2.a5445751.chunk.js": "/Chat-Room/static/js/2.a5445751.chunk.js",
-    "static/js/2.a5445751.chunk.js.map": "/Chat-Room/static/js/2.a5445751.chunk.js.map",
+    "static/js/2.ba857ad9.chunk.js": "/Chat-Room/static/js/2.ba857ad9.chunk.js",
+    "static/js/2.ba857ad9.chunk.js.map": "/Chat-Room/static/js/2.ba857ad9.chunk.js.map",
     "static/js/3.65bad370.chunk.js": "/Chat-Room/static/js/3.65bad370.chunk.js",
     "static/js/3.65bad370.chunk.js.map": "/Chat-Room/static/js/3.65bad370.chunk.js.map",
     "index.html": "/Chat-Room/index.html",
     "static/css/main.e548656f.chunk.css.map": "/Chat-Room/static/css/main.e548656f.chunk.css.map",
-    "static/js/2.a5445751.chunk.js.LICENSE.txt": "/Chat-Room/static/js/2.a5445751.chunk.js.LICENSE.txt",
+    "static/js/2.ba857ad9.chunk.js.LICENSE.txt": "/Chat-Room/static/js/2.ba857ad9.chunk.js.LICENSE.txt",
     "static/media/arrow-down.600ee40a.svg": "/Chat-Room/static/media/arrow-down.600ee40a.svg",
     "static/media/App.css": "/Chat-Room/static/media/mobileBackgroundImage5.11eef70d.jpg",
     "static/media/greater-than-solid.2f6abf5f.svg": "/Chat-Room/static/media/greater-than-solid.2f6abf5f.svg",
@@ -21,8 +21,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.1762c669.js",
-    "static/js/2.a5445751.chunk.js",
+    "static/js/2.ba857ad9.chunk.js",
     "static/css/main.e548656f.chunk.css",
-    "static/js/main.88633527.chunk.js"
+    "static/js/main.d7270b8d.chunk.js"
   ]
 }
