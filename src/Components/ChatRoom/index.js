@@ -1,7 +1,7 @@
 
 import styles from './main.module.scss'
 import SideBar from './SideBar'
-import ChatSection from './ChatWindow'
+import ChatWindow from './ChatWindow'
 
 function ChatRoom()
 {
@@ -9,7 +9,7 @@ function ChatRoom()
     return (
         <div className={styles.chatroom}>
             <SideBar/>
-            <ChatSection/>
+            <ChatWindow/>
         </div>
     )
 }

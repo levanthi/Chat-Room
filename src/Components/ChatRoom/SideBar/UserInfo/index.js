@@ -20,7 +20,7 @@ function UserInfo()
                     className={styles.logout} 
                     onClick = {()=>{
                         sessionStorage.removeItem('user')
-                        setUser(undefined)
+                        setUser(null)
                         navigate('/Chat-Room/signin')
                     }}
                 >Đăng xuất</button>

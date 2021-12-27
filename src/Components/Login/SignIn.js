@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState ,useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
-import { ref, child, get } from "firebase/database"
+import { ref, child, get,onValue } from "firebase/database"
 
 import Loading from '../Loading'
 import {db} from '../../Firebase/config'
@@ -143,6 +143,13 @@ function SignIn()
                                 sessionStorage.setItem('user',temp)
                                 setUser(temp)
                                 navigate('/Chat-Room/chatroom')
+
+                                const userRef = ref(db, 'users/' + account)
+                                onValue(userRef, (snapshot) => {
+                                const data = snapshot.val()
+                                setUser(data)
+                                })
+
                             }
                             else{
                                 signinRef.current.innerText='Tài khoản hoặc mật khẩu không chính xác!'

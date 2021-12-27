@@ -1,9 +1,9 @@
 import {Routes,Route,useNavigate} from 'react-router-dom'
-import {useState,useEffect,useLayoutEffect,createContext,useRef} from 'react'
-import {db} from './Firebase/config'
-import { ref ,onValue} from "firebase/database";
+import {useState,useEffect,createContext, useMemo,useRef, useCallback, useLayoutEffect} from 'react'
+import { ref, onValue } from "firebase/database"
 
 import './App.css';
+import {db} from './Firebase/config'
 import SignIn from './Components/Login/SignIn';
 import SignUp from './Components/Login/SignUp';
 import Home from './Components/Home';
@@ -19,37 +19,44 @@ function App() {
   const [chatWindow,setChatWindow] = useState()
   const [loading,setLoading] = useState(false)
   const navigate = useNavigate()
-  const accountRef = useRef()
-  useLayoutEffect(()=>{
+  useEffect(()=>{
     let storage = JSON.parse(sessionStorage.getItem('user'))
     if(storage)
     {
       setUser(storage)
-      navigate('/chatroom')
-    }
-  },[])
-  useEffect(()=>{
-    const accountName = accountRef.current
-    if(accountName)
-    {
-      const userUpdate = ref(db, 'users/'+accountName);
-      onValue(userUpdate, (snapshot) => {
-        const data = snapshot.val();
+      navigate('Chat-Room/chatroom')
+
+      const userRef = ref(db, 'users/' + JSON.parse(sessionStorage.getItem('user')).accountName)
+      onValue(userRef, (snapshot) => {
+        const data = snapshot.val()
         setUser(data)
       })
+      console.log('call')
     }
-  },[accountRef.current])
+  },[])
+  // useEffect(()=>{
+  //   if(user)
+  //   {
+  //     const userRef = ref(db, 'users/' + user.accountName)
+  //     onValue(userRef, (snapshot) => {
+  //       const data = snapshot.val()
+  //       setUser(data)
+  //     })
+  //   }
+  // },[])
+  useEffect(()=>{
+    if(chatWindow)
+    {
+      setChatWindow(null)
+    }
+  },[window.location.pathname])
   useEffect(()=>{
     if(user)
     {
       sessionStorage.setItem('user',JSON.stringify(user))
-      accountRef.current = user.accountName
-    }
-    return ()=>{
-      setChatWindow(null)
     }
   },[user])
-
+  console.log(user)
   console.log('app:rerender')
   return (
     <context.Provider value={{user,setUser,chatWindow,setChatWindow,loading,setLoading}}>

@@ -61,7 +61,7 @@ function ChatSection()
             return styles.me
         }
     }
-    console.log('message-render')
+    console.log('chatSection-render')
     if(chatWindow)
     {
         let renderBox =[]

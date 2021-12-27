@@ -1,4 +1,4 @@
-import { useContext,useState,useRef, useEffect } from 'react'
+import { useContext,useState,useRef, useEffect,useMemo } from 'react'
 import {  ref, child, get,update,onValue,set,remove } from "firebase/database"
 import clsx from 'clsx'
 
@@ -12,26 +12,29 @@ function Header()
 {
     const {chatWindow,setChatWindow,user} = useContext(context)
     const [userInvite,setUserInvite] = useState()
-    const [memberList,setMemberList] = useState({})
+    const [memberList,setMemberList] = useState()
     const userInviteRef = useRef()
     const errRef = useRef()
     let id
-    useEffect(()=>{
-        if(chatWindow)
+    useMemo(()=>{
+        if(chatWindow){
             id=chatWindow.id
-        const membersRef = ref(db, '/chatrooms/' + id + '/members');
-        onValue(membersRef, (snapshot) => {
-        const data = snapshot.val();
-        setMemberList(data)
-        })
+            const membersRef = ref(db, '/chatrooms/' + id + '/members');
+            onValue(membersRef, (snapshot) => {
+                const data = snapshot.val();
+                setMemberList(data)
+            })
+        }
     },[chatWindow])
     useEffect(()=>{
-        const chatWindowRef = ref(db, 'chatrooms/' + id)
-        onValue(chatWindowRef, (snapshot) => {
-            const data = snapshot.val();
-            setChatWindow(data);
-        })
-        
+        if(id)
+        {
+            const chatWindowRef = ref(db, 'chatrooms/' + id)
+            onValue(chatWindowRef, (snapshot) => {
+                const data = snapshot.val();
+                setChatWindow(data);
+            })
+        }
     },[id])
     function handleInviteUser()
     {

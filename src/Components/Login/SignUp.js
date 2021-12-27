@@ -253,7 +253,7 @@ function SignUp()
                     signupRef.current.innerText='Tên tài khoản đã tồn tại!'
                 } else {
                     writeData('users/',temp.accountName,temp)
-                    alert('SignUp susscess! signin please!!!')
+                    alert('Đăng ký thành công! Xin mời đăng nhập!')
                     navigate('/Chat-Room/signin')
                 }
                 setLoading(false)

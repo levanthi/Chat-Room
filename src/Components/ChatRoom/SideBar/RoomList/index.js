@@ -16,7 +16,7 @@ function RoomList()
     const addRoombox = useRef()
     const [inputName,setInputName] = useState('')
     const [inputDescription,setInputDescription] = useState('')
-    const {user,setChatWindow,loading,setLoading} = useContext(context)
+    const {user,setChatWindow,loading,setLoading,setUser} = useContext(context)
     function handleAddRoom()
     {
         let id =ID()
@@ -32,6 +32,7 @@ function RoomList()
         const updates = {}
         updates[`users/${user.accountName}/rooms/${id}`]={name:inputName}
         update(ref(db), updates)
+
 
         addRoombox.current.style.display='none'
         setInputName('')
