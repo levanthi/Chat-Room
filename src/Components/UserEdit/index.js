@@ -27,7 +27,6 @@ function UserEdit()
             updates[`users/${user.accountName}/avata`] = avata
             update(ref(db),updates)
             let rooms = Object.keys(user.rooms||{})||[]
-            console.log(rooms)
             rooms.forEach((room)=>
             {
                 set(ref(db, 'chatrooms/' + room +'/members/'+user.accountName), {
